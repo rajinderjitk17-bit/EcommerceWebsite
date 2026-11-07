@@ -4,9 +4,9 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: JSON.parse(sessionStorage.getItem("authUser")) || {
-      name: "",
+      name: "VIP Member",
       password: "",
-      authUser: false,
+      authUser: true,
       image: "",
     },
     error: null,

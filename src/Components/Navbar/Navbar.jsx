@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/logo.png";
 import Cart from "../Cart/Cart";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../features/slices/authSlice";
 import { filterProducts } from "../../features/slices/productsSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShoppingBag,
   Heart,
-  LogOut,
   Menu,
   X,
   Search,
@@ -249,26 +247,27 @@ const Navbar = () => {
                 </button>
 
                 {/* Dropdown Menu on Hover/Click */}
-                <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all transform origin-top-right">
+                <div className="absolute right-0 top-full mt-2 w-52 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all transform origin-top-right">
                   <div className="px-3 py-2 border-b border-slate-100">
-                    <p className="text-xs font-bold text-slate-900">Signed in as</p>
-                    <p className="text-xs text-indigo-600 truncate">{displayName}</p>
+                    <p className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">AURA Member</p>
+                    <p className="text-xs font-bold text-indigo-600 truncate">{displayName}</p>
                   </div>
                   <Link
                     to="/filteredProducts/Suits"
                     onClick={() => dispatch(filterProducts("Suits"))}
                     className="flex items-center justify-between px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded-lg transition-colors mt-1"
                   >
-                    <span>My Orders</span>
+                    <span>Exclusive Suits</span>
                     <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                   </Link>
-                  <button
-                    onClick={() => dispatch(logout())}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+                  <Link
+                    to="/filteredProducts/Dresses"
+                    onClick={() => dispatch(filterProducts("Dresses"))}
+                    className="flex items-center justify-between px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded-lg transition-colors"
                   >
-                    <LogOut className="w-3.5 h-3.5 text-rose-600" />
-                    <span>Sign Out</span>
-                  </button>
+                    <span>Haute Dresses</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -376,16 +375,10 @@ const Navbar = () => {
               </div>
 
               <div className="pt-6 border-t border-slate-100">
-                <button
-                  onClick={() => {
-                    dispatch(logout());
-                    setMobileMenuOpen(false);
-                  }}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-rose-50 text-rose-600 font-bold text-xs uppercase tracking-wider hover:bg-rose-100 transition-colors"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Sign Out ({displayName})</span>
-                </button>
+                <div className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-100 text-slate-800 font-bold text-xs uppercase tracking-wider">
+                  <Sparkles className="w-4 h-4 text-amber-500" />
+                  <span>AURA VIP Experience</span>
+                </div>
               </div>
             </motion.div>
           </>
