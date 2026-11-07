@@ -19,7 +19,7 @@ function App() {
             path="/"
             element={authUser ? <Main></Main> : <Login></Login>}
           ></Route>
-
+  
           <Route
             path="/filteredProducts/:type"
             element={<FilteredProducts></FilteredProducts>}
