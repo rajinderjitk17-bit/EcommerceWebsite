@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Sparkles, ArrowRight, ShieldCheck, Truck, RotateCcw, Heart } from "lucide-react";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -14,102 +16,143 @@ const Footer = () => {
       setTimeout(() => {
         setEmail("");
         setSubscribed(false);
-      }, 3000);
+      }, 3500);
     }
   };
 
   return (
-    <footer className="bg-slate-950 text-slate-300 font-inter pt-16 pb-12 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <footer className="bg-brand-950 text-slate-300 font-sans pt-20 pb-12 border-t border-slate-900 relative overflow-hidden">
+      {/* Decorative subtle ambient lights */}
+      <div className="absolute top-0 right-1/3 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        {/* Top VIP Perks Strip */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-14 border-b border-white/10 text-xs">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-indigo-400">
+              <Truck className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="font-bold text-white text-sm">Complimentary Express</p>
+              <p className="text-slate-400 text-[11px]">Carbon-neutral worldwide delivery</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-amber-400">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="font-bold text-white text-sm">Guaranteed Authenticity</p>
+              <p className="text-slate-400 text-[11px]">100% verified certified provenance</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
+              <RotateCcw className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="font-bold text-white text-sm">30-Day Effortless Returns</p>
+              <p className="text-slate-400 text-[11px]">Complimentary prepaid return labels</p>
+            </div>
+          </div>
+        </div>
+
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/80">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 py-14 border-b border-white/10">
           {/* Brand Info Column */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2.5">
               <img
                 className="h-10 w-auto object-contain brightness-110"
                 src={logo}
-                alt="StyleHub logo"
+                alt="AURA Luxury Brand"
               />
-              <span className="text-2xl font-black tracking-tight text-white">
-                Style<span className="text-indigo-500">Hub</span>
+              <span className="text-2xl font-display font-black tracking-tighter text-white uppercase">
+                AURA<span className="text-indigo-500">.</span>
               </span>
-            </div>
-            <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
-              Your destination for premium fashion, timeless seasonal essentials, and curated designer streetwear. Designed for confidence and everyday comfort.
+            </Link>
+
+            <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed font-light">
+              Haute Couture and refined everyday garments designed for the modern aesthetic vanguard. Milled from certified sustainable fibers with zero compromise on luxury.
             </p>
+
             <div className="flex items-center gap-3 pt-2">
-              {["Twitter", "Instagram", "Facebook", "LinkedIn"].map((platform) => (
+              {["Instagram", "Twitter", "Pinterest", "LinkedIn"].map((platform) => (
                 <span
                   key={platform}
-                  className="w-9 h-9 rounded-full bg-slate-900 hover:bg-indigo-600 border border-slate-800 flex items-center justify-center text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-indigo-600 border border-white/10 text-[11px] font-mono text-slate-400 hover:text-white transition-all cursor-pointer"
                 >
-                  {platform.charAt(0)}
+                  {platform}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Quick Categories */}
+          {/* Curated Departments */}
           <div>
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
-              Collections
+            <h4 className="text-white text-xs font-mono font-bold uppercase tracking-widest mb-4">
+              Departments
             </h4>
-            <ul className="space-y-2.5 text-sm text-slate-400">
-              {["Hoodies & Sweatshirts", "Summer Dresses", "Tailored Suits", "Running Shoes", "Organic T-Shirts"].map(
+            <ul className="space-y-2 text-xs text-slate-400 font-light">
+              {["Tailored Suits", "Silk Evening Dresses", "Minimalist Footwear", "Heavyweight Hoodies", "Organic Cotton Tees", "Selvedge Denim"].map(
                 (item, idx) => (
                   <li key={idx}>
-                    <a href="#categories" className="hover:text-indigo-400 transition-colors">
+                    <span className="hover:text-amber-300 transition-colors cursor-pointer">
                       {item}
-                    </a>
+                    </span>
                   </li>
                 )
               )}
             </ul>
           </div>
 
-          {/* Customer Care */}
+          {/* Client Concierge */}
           <div>
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
-              Customer Support
+            <h4 className="text-white text-xs font-mono font-bold uppercase tracking-widest mb-4">
+              Client Concierge
             </h4>
-            <ul className="space-y-2.5 text-sm text-slate-400">
-              {["Order Tracking", "Shipping Policy", "Easy 30-Day Returns", "Size Guide", "Help & FAQ"].map(
+            <ul className="space-y-2 text-xs text-slate-400 font-light">
+              {["VIP Private Styling", "Order Tracking Portal", "Bespoke Size Consultation", "Care & Maintenance", "Sustainability Report"].map(
                 (item, idx) => (
                   <li key={idx}>
-                    <a href="#support" className="hover:text-indigo-400 transition-colors">
+                    <span className="hover:text-amber-300 transition-colors cursor-pointer">
                       {item}
-                    </a>
+                    </span>
                   </li>
                 )
               )}
             </ul>
           </div>
 
-          {/* Newsletter Box */}
+          {/* VIP Insiders Club */}
           <div>
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-4">
-              Stay in the Loop
+            <h4 className="text-white text-xs font-mono font-bold uppercase tracking-widest mb-2 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              VIP Insiders Club
             </h4>
-            <p className="text-xs text-slate-400 leading-relaxed mb-3">
-              Subscribe to get exclusive discount drops, seasonal lookbooks, and VIP access.
+            <p className="text-xs text-slate-400 leading-relaxed mb-4 font-light">
+              Receive private salon invitations, seasonal lookbooks, and 15% off your initial order.
             </p>
             <form onSubmit={handleSubscribe} className="space-y-2">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+                placeholder="Enter private email"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-indigo-400 transition-colors font-sans"
                 required
               />
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold tracking-wider uppercase shadow-md transition-colors cursor-pointer"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-indigo-600/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                {subscribed ? "✓ Subscribed!" : "Subscribe"}
+                <span>{subscribed ? "✓ You Are on the VIP List" : "Join the Club"}</span>
+                {!subscribed && <ArrowRight className="w-3.5 h-3.5" />}
               </motion.button>
             </form>
           </div>
@@ -117,14 +160,14 @@ const Footer = () => {
 
         {/* Bottom Bar with User Name Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p className="text-center sm:text-left">
-            © {year} <span className="text-slate-300 font-semibold">Rajinder jit kaur</span>. All rights reserved.
+          <p className="text-center sm:text-left font-light">
+            © {year} <span className="text-slate-200 font-bold">Rajinder jit kaur</span>. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-6 text-slate-500">
-            <span className="hover:text-slate-300 cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-slate-300 cursor-pointer">Terms of Service</span>
-            <span className="hover:text-slate-300 cursor-pointer">Security</span>
+          <div className="flex items-center gap-6 text-slate-400 text-xs font-mono">
+            <span className="hover:text-slate-200 cursor-pointer">Privacy Charter</span>
+            <span className="hover:text-slate-200 cursor-pointer">Terms of Service</span>
+            <span className="hover:text-slate-200 cursor-pointer">Security Standards</span>
           </div>
         </div>
       </div>

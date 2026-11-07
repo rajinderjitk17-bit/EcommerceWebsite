@@ -1,27 +1,41 @@
 import React from "react";
 import { storeData } from "../../assets/data/dummyData";
 import ProductSectionItem from "./ProductSectionItem";
+import { filterProducts } from "../../features/slices/productsSlice";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 const ProductSection = () => {
+  const dispatch = useDispatch();
+
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 font-inter">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-14 font-sans">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-slate-200">
         <div>
-          <span className="text-rose-600 font-bold text-xs tracking-wider uppercase bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
-            Special Promotion
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-100 text-rose-700 text-xs font-mono font-semibold uppercase tracking-wider mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-rose-600" />
+            Seasonal Capsule
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-display font-black tracking-tight text-slate-900 mt-1">
             Summer T-Shirt Collection (30% OFF)
           </h2>
-          <p className="text-sm text-slate-500 mt-1">
-            Breathable, durable, and crafted from 100% organic cotton
+          <p className="text-sm text-slate-500 mt-1 font-light max-w-lg">
+            Cut from 240 GSM organic ring-spun cotton. Pre-shrunk, heavyweight drape, and double-needle stitched.
           </p>
         </div>
 
-        <div className="mt-4 md:mt-0 text-xs font-semibold text-slate-400">
-          Showing 6 curated picks
+        <div className="mt-4 md:mt-0">
+          <Link
+            to="/filteredProducts/T-Shirts"
+            onClick={() => dispatch(filterProducts("T-Shirts"))}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-800 transition-colors group"
+          >
+            <span>View All T-Shirts</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </div>
 
