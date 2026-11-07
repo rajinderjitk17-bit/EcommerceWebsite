@@ -1,56 +1,3 @@
-// import { createSlice } from "@reduxjs/toolkit";
-
-// export const authSlice = createSlice({
-//   name: "auth",
-//   initialState: {
-//     user: JSON.parse(sessionStorage.getItem("authUser")) || {
-//       name: "",
-//       password: "",
-//       authUser: false,
-//     },
-//   },
-//   reducers: {
-//     login(state, action) {
-//       const userId = action.payload;
-
-//       // Validation checks
-//       const userValidation = /^[A-Za-z]{4,10}$/i.test(userId.name);
-//       const passwordValidation = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,10}$/i.test(userId.password);
-
-//       // Ensure we mutate the state correctly
-//       state.user.name = userId.name;
-//       state.user.password = userId.password;
-
-//       // If both validations pass
-//       if (userValidation && passwordValidation) {
-//         state.user.authUser = true;
-
-//         // Save valid user state to sessionStorage
-//         const saveState = JSON.stringify(state.user);
-//         sessionStorage.setItem("authUser", saveState);
-//         console.log("User is authenticated:", state.user);
-//       } else {
-//         // If validations fail, reset the `authUser` flag
-//         state.user.authUser = false;
-//         console.log("Validation failed. User is not authenticated.");
-//       }
-//     },
-//     logout(state) {
-//       // Reset user state on logout
-//       state.user = {
-//         name: "",
-//         password: "",
-//         authUser: false,
-//       };
-
-//       // Clear sessionStorage
-//       sessionStorage.clear();
-//     },
-//   },
-// });
-
-// export const { login, logout } = authSlice.actions;
-// export default authSlice.reducer;
 import { createSlice } from "@reduxjs/toolkit";
 
 export const authSlice = createSlice({
@@ -60,53 +7,56 @@ export const authSlice = createSlice({
       name: "",
       password: "",
       authUser: false,
+      image: "",
     },
+    error: null,
   },
   reducers: {
     login(state, action) {
       const userId = action.payload;
 
-      // Validation checks
+      // Validation checks: 4-10 alphabetic letters for username
       const userValidation = /^[A-Za-z]{4,10}$/i.test(userId.name);
-      const passwordValidation = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,10}$/i.test(userId.password);
+      // Password: 4-10 chars with at least one letter, one number, and one special char
+      const passwordValidation = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,10}$/i.test(
+        userId.password
+      );
 
-      // Update the state
       state.user.name = userId.name;
       state.user.password = userId.password;
+      state.user.image = userId.image || state.user.image || "";
 
       if (userValidation && passwordValidation) {
         state.user.authUser = true;
+        state.error = null;
 
-        // Save valid user state to sessionStorage
         const saveState = JSON.stringify(state.user);
         sessionStorage.setItem("authUser", saveState);
-        alert("Login successful!"); // Success alert
       } else {
         state.user.authUser = false;
-
-        // Validation error alerts
         if (!userValidation) {
-          alert("Username must be 4-10 alphabetic characters.");
-        }
-        if (!passwordValidation) {
-          alert("Password must be 4-10 characters long and include at least one number, one letter, and one special character.");
+          state.error = "Username must be 4 to 10 alphabetic characters.";
+        } else if (!passwordValidation) {
+          state.error =
+            "Password must be 4-10 characters and include at least one letter, one number, and one special character (!@#$%^&*).";
         }
       }
     },
     logout(state) {
-      // Reset user state on logout
       state.user = {
         name: "",
         password: "",
         authUser: false,
+        image: "",
       };
-
-      // Clear sessionStorage
+      state.error = null;
       sessionStorage.clear();
-      alert("You have logged out successfully."); // Logout feedback
+    },
+    clearAuthError(state) {
+      state.error = null;
     },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, clearAuthError } = authSlice.actions;
 export default authSlice.reducer;

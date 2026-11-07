@@ -1,19 +1,42 @@
 import React from "react";
 import { storeData } from "../../assets/data/dummyData";
 import ProductSectionItem from "./ProductSectionItem";
+import { motion } from "framer-motion";
 
 const ProductSection = () => {
   return (
-    <div>
-      <div className="bg-black p-2 w-[50%] mx-auto rounded-md">
-        <h2 className="text-red-600 text-center text-lg font-inter font-bold tracking-normal leading-none">
-          SUMMER T-Shirt SALE 30%
-        </h2>
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 font-inter">
+      {/* Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-slate-200">
+        <div>
+          <span className="text-rose-600 font-bold text-xs tracking-wider uppercase bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
+            Special Promotion
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">
+            Summer T-Shirt Collection (30% OFF)
+          </h2>
+          <p className="text-sm text-slate-500 mt-1">
+            Breathable, durable, and crafted from 100% organic cotton
+          </p>
+        </div>
+
+        <div className="mt-4 md:mt-0 text-xs font-semibold text-slate-400">
+          Showing 6 curated picks
+        </div>
       </div>
-      <div className="grid grid-cols-3 justify-items-center py-8 gap-4 mx-auto max-w-7xl">
+
+      {/* Product Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
         {storeData.slice(0, 6).map((product, index) => {
           return (
-            <div key={index}>
+            <motion.div
+              key={product.id || index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08, duration: 0.5 }}
+              className="w-full flex justify-center"
+            >
               <ProductSectionItem
                 id={product.id}
                 name={product.name}
@@ -23,12 +46,12 @@ const ProductSection = () => {
                 totalPrice={product.totalPrice}
                 color={product.color}
                 size={product.size}
-              ></ProductSectionItem>
-            </div>
+              />
+            </motion.div>
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 
