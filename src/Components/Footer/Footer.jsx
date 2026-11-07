@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Sparkles, ArrowRight, ShieldCheck, Truck, RotateCcw, Heart } from "lucide-react";
+import { Sparkles, ArrowRight, ShieldCheck, Truck, RotateCcw } from "lucide-react";
 
 const Footer = () => {
   const year = new Date().getFullYear();

@@ -7,13 +7,12 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, addToCart } from "../../features/slices/cartSlice";
+import { removeFromCart } from "../../features/slices/cartSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShoppingBag,
   Trash2,
   ArrowRight,
-  ShieldCheck,
   CheckCircle2,
   X,
   Truck,
